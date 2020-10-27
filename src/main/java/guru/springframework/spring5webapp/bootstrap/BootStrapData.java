@@ -35,23 +35,27 @@ public class BootStrapData implements CommandLineRunner {
         Book ddd = new Book("Domain driven design", "12122");
         eric.getBooks().add(ddd);
         ddd.getAuthors().add(eric);
-
+        ddd.setPublisher(pinguinBooks);
+        pinguinBooks.getPublishedBooks().add(ddd);
         authorRepository.save(eric);
         bookRepository.save(ddd);
+
 
         Author rod = new Author("Rod", "Johnson");
         Book noEjb = new Book("J2EE Dev without EJB", "121233222");
         rod.getBooks().add(noEjb);
         noEjb.getAuthors().add(rod);
+        noEjb.setPublisher(pinguinBooks);
+        pinguinBooks.getPublishedBooks().add(noEjb);
 
         authorRepository.save(rod);
         bookRepository.save(noEjb);
 
 
-
         System.out.println("Started in Bootstrap");
         System.out.println("Number of books added: " + bookRepository.count());
         System.out.println("Number of publishers added: " + publisherRepository.count());
+        System.out.println("Number of books in publisher: " + pinguinBooks.getPublishedBooks().size());
 
 
     }
