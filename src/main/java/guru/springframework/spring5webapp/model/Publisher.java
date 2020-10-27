@@ -1,9 +1,8 @@
 package guru.springframework.spring5webapp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Publisher {
@@ -14,6 +13,10 @@ public class Publisher {
 
     private String name;
     private String address;
+
+    @OneToMany
+    @JoinColumn(name = "publisher_id")
+    private Set<Book> publishedBooks = new HashSet<>();
 
     public Publisher() {
     }
@@ -45,6 +48,14 @@ public class Publisher {
 
     public void setAddress(final String address) {
         this.address = address;
+    }
+
+    public Set<Book> getPublishedBooks() {
+        return publishedBooks;
+    }
+
+    public void setPublishedBooks(final Set<Book> publishedBooks) {
+        this.publishedBooks = publishedBooks;
     }
 
     @Override
